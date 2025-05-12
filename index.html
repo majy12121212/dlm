@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دڵی من بۆ تۆ ♥</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #fff0f5, #f8f8f8);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            cursor: pointer;
+            color: #d32f2f;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #e91e63;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Heart Container */
+        #heart-container {
+            width: 300px;
+            height: 300px;
+            margin: 30px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #heart-outline {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23e91e63" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.3;
+        }
+        
+        #heart-fill {
+            width: 0%;
+            height: 100%;
+            position: absolute;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23e91e63" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: left center;
+            clip-path: inset(0 100% 0 0);
+            transition: clip-path 0.5s ease;
+        }
+        
+        #heart-percent {
+            font-size: 3em;
+            font-weight: bold;
+            color: #e91e63;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+        
+        /* Message Box */
+        #message {
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            font-size: 1.2em;
+            line-height: 1.8;
+            min-height: 100px;
+        }
+        
+        /* Share Button */
+        #share-btn {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(233,30,99,0.4);
+            transition: all 0.3s ease;
+        }
+        
+        #share-btn:hover {
+            background-color: #c2185b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(233,30,99,0.6);
+        }
+        
+        /* Floating Elements */
+        .floating {
+            position: absolute;
+            pointer-events: none;
+            z-index: 5;
+            animation: float-up 5s ease-out forwards;
+        }
+        
+        /* Love Message */
+        .love-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(233, 30, 99, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .love-message.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .love-message-content {
+            font-size: 4em;
+            color: white;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Signature */
+        .signature {
+            font-style: italic;
+            font-size: 1.5em;
+            margin-top: 40px;
+            color: #e91e63;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>دڵی من  بۆ تۆ ♥</h1>
+        
+        <div id="heart-container">
+            <div id="heart-outline"></div>
+            <div id="heart-fill"></div>
+            <div id="heart-percent">0%</div>
+        </div>
+        
+        <div id="message">
+            هەر کلیکێک خۆشەویستیت زیاد دەکات لە دڵمدا...
+        </div>
+        
+        <button id="share-btn">هاوبەشی بکە لەگەڵ هاوڕێ</button>
+        
+        <div class="signature">
+            بە نەمری،<br>
+            <span id="sender-name">[ناوی تۆ]</span>
+        </div>
+    </div>
+
+    <!-- Love Message Overlay -->
+    <div class="love-message" id="loveMessage">
+        <div class="love-message-content">I love you babe! ♥</div>
+    </div>
+
+    <script>
+        // Kurdish romantic messages
+        const messages = [
+            "هەر کلیکێک خۆشەویستیت زیاد دەکات لە دڵمدا...",
+            "تۆ باشترینی منیت لە ژیاندا!",
+            "تۆ نەک تەنها خۆشەویست، بەڵکو ڕۆح و دڵ و هەموو بیرکردنەوەکانمیت، و بەبێ تۆ ژیانم وەک شەوێکی تاریک بێ ڕوناکیە.",
+            "هیچ کەس وەک تۆ نابێت لە دڵمدا!",
+            "هەموو جارێک تۆم دەبینم، گەرمی لەشم زیاد دەکەیت.",
+            "ئەگەر هەزار ساڵم هەبێت، هەزار ساڵت خۆشدەوێم، چونکە تۆ یەکێکیت کە هەرگیز دووبارە نابێتەوە.",
+            
+"تۆ وەک گوڵێکی بەهاریت کە هەموو ڕووحی پڕدەکات بە بۆنێکی خۆش، و هەر کاتێک تۆ لام نزیک دەبیت، دنیا وەک خەونێکی جوان دەبێت",
+            " ئەگەر ڕۆژێک بمرم، لە پێش خوا دەڵێم کە تۆم خۆشدەوێت، و لە ژیانی دوای ئەم دنیایەش بەردەوام دەبم لە خۆشەویستی تۆ."
+
+
+        ];
+        
+        let clickCount = 0;
+        const maxClicks = 100;
+        
+        // Update heart on click
+        document.addEventListener('click', function(e) {
+            if (clickCount < maxClicks) {
+                clickCount++;
+                updateHeart();
+                createFloatingElement(e.clientX, e.clientY);
+            }
+            
+            // Special celebration at 100%
+            if (clickCount === maxClicks) {
+                celebrateFullHeart();
+            }
+        });
+        
+        function updateHeart() {
+            const percent = Math.floor((clickCount / maxClicks) * 100);
+            
+            // Update heart fill
+            document.getElementById('heart-fill').style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+            document.getElementById('heart-percent').textContent = `${percent}%`;
+            
+            // Change message every 10 clicks
+            if (clickCount % 10 === 0) {
+                document.getElementById('message').textContent = messages[Math.floor(Math.random() * messages.length)];
+            }
+        }
+        
+        function createFloatingElement(x, y) {
+            const types = ['❤', '💋', '🌹', '🌸', '💌'];
+            const element = document.createElement('div');
+            element.className = 'floating';
+            element.innerHTML = types[Math.floor(Math.random() * types.length)];
+            element.style.left = x + 'px';
+            element.style.top = y + 'px';
+            element.style.fontSize = (Math.random() * 2 + 1.5) + 'em';
+            element.style.animationDuration = (3 + Math.random() * 4000) + 's';
+            
+            document.body.appendChild(element);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 5000000);
+        }
+        
+        function celebrateFullHeart() {
+            document.getElementById('message').textContent = "i love you my huart ♥";
+            
+            // Create celebration elements
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = window.innerHeight + 50;
+                    createFloatingElement(x, y);
+                }, i * 200);
+            }
+            
+            // Show love message after 2 seconds
+            setTimeout(() => {
+                document.getElementById('loveMessage').classList.add('show');
+            }, 2000);
+        }
+        
+        // Share functionality
+        document.getElementById('share-btn').addEventListener('click', function() {
+            const shareText = `دڵی من بۆ تۆ ${document.getElementById('heart-percent').textContent} پڕە! ♥\n\n${document.getElementById('message').textContent}\n\n- ${document.getElementById('sender-name').textContent}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'دڵی من بۆ تۆ',
+                    text: shareText,
+                    url: window.location.href
+                }).catch(err => {
+                    copyToClipboard(shareText);
+                });
+            } else {
+                copyToClipboard(shareText);
+                alert("پەیامەکە کۆپی کرایەوە! دەتوانیت بیبەخشیتە هاوڕێت");
+            }
+        });
+        
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        }
+    </script>
+</body>
+</html>
